@@ -9,6 +9,7 @@ class Signin extends React.Component {
           password:''
         };
     }
+    
     handleEmailChange(e){
         this.setState({email:e.target.value})
     }
@@ -16,6 +17,16 @@ class Signin extends React.Component {
         this.setState({password:e.target.value})
     }
     signIn(){
+        axios.post('/signin', {
+            email: this.state.email,
+            password: this.state.password
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         alert('Email address is ' + this.state.email + ' Password is ' + this.state.password);            
     }
     render() {

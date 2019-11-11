@@ -14,12 +14,6 @@ class Signin extends React.Component {
         };
     }
     
-    handleEmailChange(e){
-        this.setState({email:e.target.value})
-    }
-    handlePasswordChange(e){
-        this.setState({password:e.target.value})
-    }
     signIn(){
         axios.post('/signin', {
             email: this.state.email,
@@ -33,21 +27,34 @@ class Signin extends React.Component {
           });
         alert('Email address is ' + this.state.email + ' Password is ' + this.state.password);            
     }
+    handleEmailChange(e){
+        this.setState({email:e.target.value})
+    }
+    handlePasswordChange(e){
+        this.setState({password:e.target.value})
+    }
     render() {
         return (
+          <div>
             <form className="form-signin">
-                <h2 className="form-signin-heading"> Please sign in </h2>
-                <label for="inputEmail" className="sr-only">Email address</label>
-                <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
-                <label for="inputPassword" className="sr-only">Password</label>
-                <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
-                <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Sign in</button>
+              <h2 className="form-signin-heading">Please sign in</h2>
+              <label for="inputEmail" className="sr-only">Email address</label>
+              <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
+              <label for="inputPassword" className="sr-only">Password</label>
+              <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
+              
+              <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Sign in</button>
             </form>
+            <div>
+              <Link to="/signup">{'Sign-up'}</Link>
+            </div>
+          </div>
+  
         )
-    }
-}
+      }
+  }
 
-class Signup extends React.Component{
+  class Signup extends React.Component{
     render() {
         return (
           <div>
@@ -59,11 +66,14 @@ class Signup extends React.Component{
               <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
               <label for="inputPassword" className="sr-only">Password</label>
               <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
-               
+              
               <button className="btn btn-lg btn-primary btn-block" onClick={this.signUp} type="button">Sign up</button>
             </form>
+            <div>
+              <Link to="/">{'Sign-in'}</Link>
+            </div>
           </div>
-           
+          
         )
       }
   }

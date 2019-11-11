@@ -18,17 +18,19 @@ class Signin extends React.Component {
     
     signIn(){
         axios.post('/signin', {
-            email: this.state.email,
-            password: this.state.password
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        alert('Email address is ' + this.state.email + ' Password is ' + this.state.password);            
-    }
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then(function (response) {
+          if(response.data == 'success'){
+            window.location.assign('http://localhost:3000/home')
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+
     handleNameChange(e){
         this.setState({name:e.target.value})
     }

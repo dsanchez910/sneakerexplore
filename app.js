@@ -15,7 +15,20 @@ app.use(express.static(path.join(__dirname,"/html")));
 
 app.use(bodyParser.json());
 
-app.post('/signin', function (req, res) {
+app.get('/', function(req,res){
+    res.sendFile(__dirname + '/html/index.html');
+  })
+  
+  app.get('/home', function (req, res) {
+    if(sessions && sessions.username){
+      res.sendFile(__dirname + '/html/home.html');
+    }
+    else{
+      res.send('unauthorized');
+    }
+  })
+
+  app.post('/signin', function (req, res) {
     sessions=req.session;
     var user_name=req.body.email;
     var password=req.body.password;

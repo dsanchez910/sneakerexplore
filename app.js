@@ -23,12 +23,12 @@ app.post('/signin', function (req, res) {
     var name=req.body.name;
     var email=req.body.email;
     var password=req.body.password;
-  
+   
     if(name && email && password){
         user.signup(name, email, password)
     }
     else{
-        res.send('Failure');
+      res.send('Failure');
     }
   })
 

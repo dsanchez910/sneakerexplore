@@ -68,4 +68,9 @@ class Signup extends React.Component{
       }
   }
 
-ReactDOM.render(<Signin />, document.getElementById('app'));
+  ReactDOM.render(
+    <Router history={hashHistory}>
+        <Route component={Signin} path="/"></Route>
+        <Route component={Signup} path="/signup"></Route>
+    </Router>,
+document.getElementById('app'));

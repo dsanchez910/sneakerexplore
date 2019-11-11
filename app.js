@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
+var user = require('./user')
  
 var app = express();
 app.use(express.static(path.join(__dirname,"/html")));
@@ -30,7 +31,7 @@ app.post('/signin', function (req, res) {
         res.send('Failure');
     }
   })
-  
+
 app.listen(3000,function(){
     console.log("Started listening on port", 3000);
 })

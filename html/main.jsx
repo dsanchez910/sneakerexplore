@@ -38,6 +38,20 @@ class Signin extends React.Component {
     handlePasswordChange(e){
         this.setState({password:e.target.value})
     }
+
+    signUp(){
+        axios.post('/signup', {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     render() {
         return (
           <div>

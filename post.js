@@ -31,3 +31,20 @@ module.exports = {
 		})
 	}
 }
+
+getPostWithId: function(id, callback){
+    MongoClient.connect(url, function(err, db){
+         db.collection('post').findOne({
+            _id: new mongodb.ObjectID(id)
+         },
+         function(err, result){
+            assert.equal(err, null);
+            if(err == null){
+                callback(result)
+            }
+            else{
+                callback(false)
+            }
+        });
+    })
+}

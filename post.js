@@ -4,14 +4,15 @@ var assert = require('assert');
 var url = 'mongodb://localhost:27017/sneakerexplore';
 
 module.exports = {
-	addPost: function(title, subject, callback){
+	addPost: function(title, subject,tag, callback){
 		MongoClient.connect(url, function(err, db) {
 		  	db.collection('post').insertOne( {
 				"title": title,
-				"subject": subject
+				"subject": subject,
+				"tag": tag
 			},function(err, result){
 				assert.equal(err, null);
-		    	console.log("Saved the post details.");
+		    	console.log("Saved the blog post details.");
 		    	if(err == null){
 		    		callback(true)
 		    	}
@@ -21,17 +22,18 @@ module.exports = {
 			});
 		});
 	},
-	updatePost: function(id, title, subject, callback){
+	updatePost: function(id, title, subject,tag, callback){
 		MongoClient.connect(url, function(err, db) {
 		  	db.collection('post').updateOne( 
 		  		{ "_id": new mongodb.ObjectID(id) },
 		  		{ $set: 
 		  			{ "title" : title,
-		  			  "subject" : subject 
+		  			  "subject" : subject ,
+		  			  "tag" : tag
 		  			}
 		  		},function(err, result){
 				assert.equal(err, null);
-		    	console.log("Updated the post details.");
+		    	console.log("Updated the blog post details.");
 		    	if(err == null){
 		    		callback(true)
 		    	}
@@ -50,6 +52,31 @@ module.exports = {
 		        });
 		     });
 		})
+	},
+	getTag: function(callback){
+		MongoClient.connect(url, function(err, db){
+			 db.collection('tag', function (err, collection) {
+		        collection.find().toArray(function (err, list) {
+		            callback(list);
+		        });
+		     });
+		})
+	},
+	addTag: function(tagName, callback){
+		MongoClient.connect(url, function(err, db) {
+		  	db.collection('tag').insertOne( {
+				"name": tagName
+			},function(err, result){
+				assert.equal(err, null);
+		    	console.log("Saved the tag details.");
+		    	if(err == null){
+		    		callback(true)
+		    	}
+		    	else{
+		    		callback(false)
+		    	}
+			});
+		});
 	},
 	deletePost: function(id, callback){
 

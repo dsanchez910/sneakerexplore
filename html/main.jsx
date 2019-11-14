@@ -38,7 +38,7 @@ class Signin extends React.Component {
       return (
         <div>
           <form className="form-signin">
-            <h2 className="form-signin-heading">Sign Into SneakerExplore</h2>
+            <h2 className="form-signin-heading">Please sign in</h2>
             <label for="inputEmail" className="sr-only">Email address</label>
             <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
             <label for="inputPassword" className="sr-only">Password</label>

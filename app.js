@@ -57,9 +57,38 @@ app.post('/signup', function (req, res) {
 app.post('/addpost', function (req, res) {
   var title = req.body.title;
   var subject = req.body.subject;
-  post.addPost(title, subject ,function(result){
+  var tag = req.body.tag;
+  var id = req.body.id;
+  console.log('id is ',id);
+  if(id == '' || id == undefined){
+    console.log('add');
+    post.addPost(title, subject ,tag,function(result){
+      res.send(result);
+    }); 
+  }
+  else{
+    console.log('update',title,subject);
+    post.updatePost(id, title, subject ,tag,function(result){
+      res.send(result);
+    }); 
+  }
+  
+})
+
+app.post('/addtag', function (req, res) {
+  var tag = req.body.tag;
+  post.addTag(tag,function(result){
     res.send(result);
-  });
+  }); 
+})
+
+app.post('/updateProfile', function(req, res){
+  var name = req.body.name;
+  var password = req.body.password;
+  
+  user.updateProfile(name, password, sessions.username, function(result){
+      res.send(result);
+  })
 })
 
 app.post('/getpost', function (req, res) {
@@ -68,13 +97,33 @@ app.post('/getpost', function (req, res) {
   });
 })
 
-app.post('/getPostWithId', function(req,res){
-    var id = req.body.id;
-    post.getPostWithId(id, function(result){
-      res.send(result)
-    })
-  })
+app.post('/gettag', function (req, res) {
+  post.getTag(function(result){
+    res.send(result);
+  });
+})
 
-app.listen(3000,function(){
-    console.log("Started listening on port", 3000);
+app.post('/deletePost', function(req,res){
+  var id = req.body.id;
+  post.deletePost(id, function(result){
+    res.send(result)
+  })
+})
+
+app.post('/getProfile', function(req,res){
+  user.getUserInfo(sessions.username, function(result){
+    res.send(result)
+  })
+})
+
+app.post('/getPostWithId', function(req,res){
+  var id = req.body.id;
+  post.getPostWithId(id, function(result){
+    res.send(result)
+  })
+})
+
+
+app.listen(8080,function(){
+    console.log("Started listening on port", 8080);
 })

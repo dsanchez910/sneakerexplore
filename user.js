@@ -21,9 +21,11 @@ module.exports = {
 			db.collection('user').findOne( { email : username 
 			},function(err, result){
 				if(result==null){
+					console.log('returning false')
 					callback(false)
 				}
 				else{
+					console.log('returning true')
 					callback(result);
 				}
 			});
@@ -38,7 +40,8 @@ module.exports = {
 		  			  "password" : password 
 		  			}
 		  		},function(err, result){
-				
+				assert.equal(err, null);
+		    	console.log("Updated user details.");
 		    	if(err == null){
 		    		callback(true)
 		    	}
